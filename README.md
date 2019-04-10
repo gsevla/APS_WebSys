@@ -16,10 +16,10 @@ Billy da Tapioca quer melhorar seu negócio de forma a poder controlar melhor su
 - [ ] Quando o produto que estava em falta estiver disponível novamente, o sistema envia uma notificação para o usuário.
 
 **Faça o que se pede:**
-1. [ ] Faça um diagrama e especifique os casos de uso do sistema **(16/04)**
-2. [ ] Faça um diagrama de classes de análise **(16/04)**
-3. [ ] Seguindo a arquitetura MVC, refine o diagrama de classes deixando-o fiel ao projeto **(30/04)**
-4. [ ] Entrega da primeira parte do sistema **(07/05)**
-5. [ ] Entrega da segunda parte do sistema **(21/05)**
+- [ ] Faça um diagrama e especifique os casos de uso do sistema **(16/04)**
+- [ ] Faça um diagrama de classes de análise **(16/04)**
+- [ ] Seguindo a arquitetura MVC, refine o diagrama de classes deixando-o fiel ao projeto **(30/04)**
+- [ ] Entrega da primeira parte do sistema **(07/05)**
+- [ ] Entrega da segunda parte do sistema **(16/05)**
 
 **OBS:** Diagramas devem ser feitos utilizando uma ferramenta de modelagem.
