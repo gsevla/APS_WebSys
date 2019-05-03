@@ -1,4 +1,4 @@
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import HomePage from ".";
 import ListaItensPage from "./pages/listaItens";
 
@@ -16,4 +16,4 @@ const AppNavigator = createStackNavigator(
   }
 );
 
-export default AppNavigator;
+export default createAppContainer(AppNavigator);

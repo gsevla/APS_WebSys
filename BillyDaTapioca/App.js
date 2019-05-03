@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { DefaultTheme ,Provider as PaperProvider } from 'react-native-paper';
-import { createAppContainer } from "react-navigation";
 import AppNavigator from "./src/routes";
 import navigationService from "./src/services/navigationService";
 import ListaItensPage from './src/pages/listaItens';
@@ -27,7 +26,7 @@ class App extends Component {
               navigationService.setTopLevelNavigator(navigatorRef);
             }}
           /> */}
-          <HomePage />
+          <AppNavigator />
       </PaperProvider>
     );
   }
