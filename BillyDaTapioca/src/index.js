@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Appbar, Text, IconButton } from 'react-native-paper';
+import { Appbar, IconButton, Modal, Portal, Text, Provider } from 'react-native-paper';
+import MyComponent from './components/bottomNavigator';
+import OfflineUser from './components/modal/offlineUser'
+
 
 export class HomePage extends Component {
+  
   static navigationOptions = {
     header: (
       <Appbar.Header>
@@ -16,28 +19,17 @@ export class HomePage extends Component {
           icon="shopping-cart"
           size={24}
           onPress={() => console.log('Pressed')}
+          disabled="true"
         />
       </Appbar.Header>
     ),
   };
 
-  _goBack = () => console.log('Went back');
-
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Toquei a bola, agora faz o gol</Text>
-      </View>
+      <MyComponent />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default HomePage;
