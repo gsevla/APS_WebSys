@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Appbar, IconButton, Modal, Portal, Text, Provider } from 'react-native-paper';
-import MyComponent from './components/bottomNavigator';
+import BottomNavigator from './components/bottomNavigator';
 import OfflineUser from './components/modal'
 
 
@@ -32,12 +32,10 @@ export class HomePage extends Component {
     )
   };
 
+
   render() {
     return (
-      <View>
-        <OfflineUser sM={this.state.modalVisible} />
-        <MyComponent />
-      </View>
+        <BottomNavigator />
     );
   }
 }

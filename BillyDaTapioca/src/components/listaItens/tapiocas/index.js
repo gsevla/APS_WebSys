@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { List, Text, Button } from 'react-native-paper';
 import api from '../../../services/api';
+import TotalCompras from '../../totalCompra';
 
 export class ListaTapiocas extends Component {
   state = {
-    tapiocas: []
+    tapiocas: [],
+    precoTotal: 0
   };
 
 
@@ -63,14 +65,19 @@ export class ListaTapiocas extends Component {
         }}
         >
           <Button
-            onPress={() => {
+            onPress={ async () => {
+              let price = 0;
               const newTapiocas = this.state.tapiocas.map(tapioca => {
                 if(tapioca.item.id == item.item.id) {
-                  if(tapioca.qtde >0) tapioca.qtde = tapioca.qtde - 1;
+                  if(tapioca.qtde > 0) {
+                    tapioca.qtde = tapioca.qtde - 1;
+                    price = price + tapioca.item.Valor;
+                  } 
                 }
                 return tapioca;
               });
-              this.setState({tapiocas: newTapiocas});
+              console.log(price);
+              await this.setState({tapiocas: newTapiocas, precoTotal: this.state.precoTotal-price});
             }}
             icon="expand-more"
             mode="outline"
@@ -82,14 +89,18 @@ export class ListaTapiocas extends Component {
           <Text style={{ marginTop: 10 }}>{item.qtde}</Text>
 
           <Button
-            onPress={() => {
+            onPress={ async () => {
+              let price = 0;
               const newTapiocas = this.state.tapiocas.map(tapioca => {
                 if(tapioca.item.id == item.item.id) {
                   tapioca.qtde = tapioca.qtde + 1;
+                  price = price + tapioca.item.Valor;
                 }
                 return tapioca;
               });
-              this.setState({tapiocas: newTapiocas});
+              console.log(price);
+              await this.setState({tapiocas: newTapiocas, precoTotal: this.state.precoTotal+price});
+              console.log(this.state.precoTotal);
             }}
             icon="expand-less"
             mode="outline"
@@ -112,6 +123,7 @@ export class ListaTapiocas extends Component {
           keyExtractor={tapioca => (tapioca.item.id).toString()}
           renderItem={this.renderItems}
         />
+        <TotalCompras repassePreco={this.state.precoTotal} />
       </View>
     )
   }
@@ -120,9 +132,8 @@ export class ListaTapiocas extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     flexDirection: 'column',
-    alignItems: 'center'
   },
   item: {
     flexDirection: 'row',
