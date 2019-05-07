@@ -3,7 +3,8 @@ import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 
 export default class OfflineUser extends React.Component {
   state = {
-    visible: false,
+    visible: this.props.sM,
+    userLevel: 0
   };
 
   _showModal = () => this.setState({ visible: true });

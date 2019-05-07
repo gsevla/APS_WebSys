@@ -1,23 +1,35 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
-import { List, Text, Button } from 'react-native-paper'
+import { List, Text, Button } from 'react-native-paper';
+import api from '../../../services/api';
 
 export class ListaTapiocas extends Component {
   state = {
-    tapiocas: [
-      {
-        id: 0,
-        nome: "Frango",
-        descricao: "frango desfiado",
-        estoque: true
-      },
-      {
-        id: 1,
-        nome: "Frango com Catupiry",
-        descricao: "frango desfiado, catupiry",
-        estoque: false
-      }
-    ]
+    tapiocas: []
+  };
+
+
+  componentDidMount() {
+    this.getTapiocas();
+  }
+
+
+  capitalizeText = (txt) => {
+    return txt.charAt(0).toUpperCase() + txt.slice(1);
+  };
+
+
+  getTapiocas = async () => {
+    const r = await api.get('/tapiocas');
+
+    const items = r.data;
+    let l = [];
+    const newItems = items.forEach((item) => {
+      l.push({item, qtde:0, compra:false});
+    });
+
+    this.setState({ tapiocas: l });
+    console.log(this.state.tapiocas);
   };
 
 
@@ -30,8 +42,8 @@ export class ListaTapiocas extends Component {
     }}
     >
       <List.Item
-        title={item.nome}
-        description={item.descricao}
+        title={this.capitalizeText(item.item.Descricao)}
+        description={`R$ ${parseFloat(item.item.Valor)}`}
         titleEllipsizeMode='middle'
         left={props => 
           <Button
@@ -39,13 +51,7 @@ export class ListaTapiocas extends Component {
             icon="priority-high"
             mode="outline"
             compact="true"
-            disabled={() => {
-              if(item.estoque) {
-                return false
-              } else {
-                return true
-              }
-            }}
+            disabled={item.item.Disponibilidade}
           >
           </Button>
         }
@@ -57,20 +63,38 @@ export class ListaTapiocas extends Component {
         }}
         >
           <Button
-            onPress={() => console.log('Pressed')}
+            onPress={() => {
+              const newTapiocas = this.state.tapiocas.map(tapioca => {
+                if(tapioca.item.id == item.item.id) {
+                  if(tapioca.qtde >0) tapioca.qtde = tapioca.qtde - 1;
+                }
+                return tapioca;
+              });
+              this.setState({tapiocas: newTapiocas});
+            }}
             icon="expand-more"
             mode="outline"
             compact="true"
+            disabled={!item.item.Disponibilidade}
           >
           </Button>
 
-          <Text style={{ marginTop: 10 }}>0</Text>
+          <Text style={{ marginTop: 10 }}>{item.qtde}</Text>
 
           <Button
-            onPress={() => console.log('Pressed')}
+            onPress={() => {
+              const newTapiocas = this.state.tapiocas.map(tapioca => {
+                if(tapioca.item.id == item.item.id) {
+                  tapioca.qtde = tapioca.qtde + 1;
+                }
+                return tapioca;
+              });
+              this.setState({tapiocas: newTapiocas});
+            }}
             icon="expand-less"
             mode="outline"
             compact="true"
+            disabled={!item.item.Disponibilidade}
             >
           </Button>
         </View>
@@ -79,12 +103,13 @@ export class ListaTapiocas extends Component {
     </View>
   );
 
+
   render() {
     return (
       <View styles={styles.container}>
         <FlatList
           data={this.state.tapiocas}
-          keyExtractor={item => item.id}
+          keyExtractor={tapioca => (tapioca.item.id).toString()}
           renderItem={this.renderItems}
         />
       </View>
