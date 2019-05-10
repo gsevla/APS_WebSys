@@ -3,22 +3,19 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import { List, Text, Button } from 'react-native-paper';
 import api from '../../../services/api';
 import TotalCompras from '../../totalCompra';
+import textManipulation from '../../../services/textManipulation';
 
 export class ListaTapiocas extends Component {
+  textManipulation = new textManipulation();
+
   state = {
     tapiocas: [],
     precoTotal: 0
   };
 
-
   componentDidMount() {
     this.getTapiocas();
   }
-
-
-  capitalizeText = (txt) => {
-    return txt.charAt(0).toUpperCase() + txt.slice(1);
-  };
 
 
   getTapiocas = async () => {
@@ -44,7 +41,7 @@ export class ListaTapiocas extends Component {
     }}
     >
       <List.Item
-        title={this.capitalizeText(item.item.Descricao)}
+        title={this.textManipulation.capitalizeText(item.item.Descricao)}
         description={`R$ ${parseFloat(item.item.Valor)}`}
         titleEllipsizeMode='middle'
         left={props => 
