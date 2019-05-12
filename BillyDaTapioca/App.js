@@ -3,12 +3,11 @@ import {
   DefaultTheme,
   Provider as PaperProvider,
   Portal,
-  Modal,
   Text,
   Appbar,
   IconButton,
 } from 'react-native-paper';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import AppNavigator from './src/routes';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
@@ -29,6 +28,14 @@ const theme = {
   },
 };
 
+const Modal = props => {
+  return (
+    <View>
+      <Text>dfdf</Text>
+    </View>
+  );
+};
+
 const tabs = createMaterialBottomTabNavigator(
   {
     A: ListaTapiocas,
@@ -47,11 +54,7 @@ const stack = createStackNavigator(
       navigationOptions: { title: 'Header title' },
     },
     modal: {
-      screen: (
-        <View>
-          <Text>dfdf</Text>
-        </View>
-      ),
+      screen: Modal,
     },
   },
   {
