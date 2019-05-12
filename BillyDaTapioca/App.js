@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { DefaultTheme ,Provider as PaperProvider, Portal, Modal, Text } from 'react-native-paper';
 import AppNavigator from "./src/routes";
+import { Provider as StoreProvider } from 'react-redux';
+import store from './src/services/redux/store';
+import UserModal from './src/components/modal';
 
 
 
@@ -17,28 +20,14 @@ const theme = {
 };
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props);
-  }
-  state = {
-    visible: false
-  };
-  
-  _showModal = () => this.setState({ visible: true });
-  _hideModal = () => this.setState({ visible: false });
-
   render() {
-    const { visible } = this.state;
     return (
-      <PaperProvider theme={theme}>
-        <Portal>
-          <Modal visible={visible} onDismiss={this._hideModal}>
-              <Text>Example Modal</Text>
-          </Modal>
-        </Portal>
-        <AppNavigator />
-      </PaperProvider>
+      <StoreProvider store={store}>
+        <PaperProvider theme={theme}>
+          <UserModal />
+          <AppNavigator />
+        </PaperProvider>
+      </StoreProvider>
     );
   }
 }

@@ -2,7 +2,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import HomePage from ".";
 
 
-const TopLevelNavigator = createStackNavigator(
+const AppContainer = createStackNavigator(
   {
     Home: { screen: HomePage },
   },
@@ -10,7 +10,5 @@ const TopLevelNavigator = createStackNavigator(
     initialRouteName: "Home"
   }
 );
-
-const AppContainer = createAppContainer(TopLevelNavigator);
 
 export default createAppContainer(AppContainer);

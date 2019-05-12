@@ -1,25 +1,21 @@
 import * as React from 'react';
-import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+import { Modal, Portal, Text, Button } from 'react-native-paper';
+import { connect } from 'react-redux';
 
-export default class UserModal extends React.Component {
-  state = {
-    visible: this.props.sM,
-    userLevel: 0
-  };
 
-  _showModal = () => this.setState({ visible: true });
-  _hideModal = () => this.setState({ visible: false });
-
-  render() {
-    const { visible } = this.state;
-    return (
-     <Provider>
-       <Portal>
-         <Modal visible={visible} onDismiss={this._hideModal}>
+const UserModal = ({ appReducer, dispatch }) => {
+  console.log(appReducer.modalVisibility);
+  return (
+    <Portal>
+         <Modal visible={appReducer.modalVisibility} onDismiss={this._hideModal}>
            <Text>Example Modal</Text>
          </Modal>
        </Portal>
-     </Provider>
-    );
-  }
+  )
 }
+
+const mapStateToProps = state => ({
+  appReducer: state.appReducer
+});
+
+export default connect(mapStateToProps)(UserModal);

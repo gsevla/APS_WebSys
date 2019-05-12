@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Appbar, IconButton, Modal, Portal, Text, Provider as PaperProvider } from 'react-native-paper';
 import BottomNavigator from './components/bottomNavigator';
+import { connect } from 'react-redux';
 
 
 export class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props);
+  }
   
-  static navigationOptions = ({navigation}) => {
+  static navigationOptions = ({ navigation }) => {
     return {
       header: (
         <Appbar.Header>
@@ -14,7 +19,7 @@ export class HomePage extends Component {
           <IconButton
             icon="person"
             size={24}
-            onPress={() => {console.log(navigation)}}
+            onPress={() => {}}
             />
           <IconButton
             icon="shopping-cart"
@@ -27,6 +32,10 @@ export class HomePage extends Component {
     }
   };
 
+  componentDidMount() {
+    this.props.navigation.setParams({  })
+  }
+
   render() {
     return (
         <BottomNavigator />
@@ -34,4 +43,8 @@ export class HomePage extends Component {
   }
 }
 
-export default HomePage;
+const mapStateToProps = state => ({
+  appReducer: state.appReducer
+});
+
+export default connect(mapStateToProps)(HomePage);
