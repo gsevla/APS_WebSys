@@ -1,8 +1,21 @@
-import React, {Component} from 'react';
-import { DefaultTheme ,Provider as PaperProvider, Portal, Modal, Text } from 'react-native-paper';
-import AppNavigator from "./src/routes";
+import React, { Component } from 'react';
+import {
+  DefaultTheme,
+  Provider as PaperProvider,
+  Portal,
+  Modal,
+  Text,
+  Appbar,
+  IconButton,
+} from 'react-native-paper';
+import { Text, View } from 'react-native';
+import AppNavigator from './src/routes';
+import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 
-
+import ListaTapiocas from './src/components/listaItens/tapiocas';
+import ListaBebidas from './src/components/listaItens/bebidas';
+import ListaCompras from './src/components/listaItens/compras';
 
 const theme = {
   ...DefaultTheme,
@@ -12,35 +25,57 @@ const theme = {
     primary: 'brown',
     accent: 'yellow',
     background: '#f8f9f9',
-    disabled: '#a6acaf'
+    disabled: '#a6acaf',
   },
 };
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props);
+const tabs = createMaterialBottomTabNavigator(
+  {
+    A: ListaTapiocas,
+    B: ListaBebidas,
+    C: ListaCompras,
+  },
+  {
+    initialRouteName: 'A',
   }
-  state = {
-    visible: false
-  };
-  
-  _showModal = () => this.setState({ visible: true });
-  _hideModal = () => this.setState({ visible: false });
+);
 
-  render() {
-    const { visible } = this.state;
-    return (
-      <PaperProvider theme={theme}>
-        <Portal>
-          <Modal visible={visible} onDismiss={this._hideModal}>
-              <Text>Example Modal</Text>
-          </Modal>
-        </Portal>
-        <AppNavigator />
-      </PaperProvider>
-    );
+const stack = createStackNavigator(
+  {
+    tabs: {
+      screen: tabs,
+      navigationOptions: { title: 'Header title' },
+    },
+    modal: {
+      screen: (
+        <View>
+          <Text>dfdf</Text>
+        </View>
+      ),
+    },
+  },
+  {
+    defaultNavigationOptions: {
+      header: (
+        <Appbar.Header>
+          <Appbar.Content title="Home" subtitle="Cardápio" />
+          <IconButton
+            icon="person"
+            size={24}
+            onPress={() => {
+              console.log(navigation);
+            }}
+          />
+          <IconButton
+            icon="shopping-cart"
+            size={24}
+            onPress={() => console.log('Pressed')}
+            disabled={true}
+          />
+        </Appbar.Header>
+      ),
+    },
   }
-}
+);
 
-export default App;
+export default createAppContainer(stack);
