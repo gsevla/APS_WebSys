@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 
-export default class OfflineUser extends React.Component {
+export default class UserModal extends React.Component {
   state = {
     visible: this.props.sM,
     userLevel: 0

@@ -2,17 +2,15 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import HomePage from ".";
 
 
-const AppNavigator = createStackNavigator(
+const TopLevelNavigator = createStackNavigator(
   {
     Home: { screen: HomePage },
   },
   {
-    initialRouteName: "Home",
-    defaultNavigationOptions: {
-      headerStyle: { backgroundColor: "tomato" },
-      headerTintColor: "#000"
-    }
+    initialRouteName: "Home"
   }
 );
 
-export default createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(TopLevelNavigator);
+
+export default createAppContainer(AppContainer);
