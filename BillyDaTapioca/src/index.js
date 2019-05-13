@@ -29,7 +29,10 @@ export class HomePage extends Component {
 
   render() {
     return (
-        <BottomNavigator />
+        <View>
+          <Text>a</Text>
+          
+        </View>
     );
   }
 }
