@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/l/workspace/APS_WebSys/BillyDaTapioca/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kn/values-kn.xml",
+            "outputFile": "/home/l/workspace/APS_WebSys/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kn/values-kn.xml",
             "map": [
                 {
                     "source": "/home/l/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/25269268f5f91e3af8aadabbf5819a0d/res/values-kn/values-kn.xml",
