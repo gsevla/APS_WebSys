@@ -23,14 +23,14 @@ export default class UserModal extends React.Component {
           <View style={styles.buttonsContainer}>
             <Button
               onPress={() => {
-  
+                this.props.navigation.push('Login');
               }}
               mode='contained'
               style={{padding: 10, marginHorizontal: 15}}
             >
               Registrar
             </Button>
-  
+              
             <Button
               onPress={() => {
   
@@ -38,7 +38,7 @@ export default class UserModal extends React.Component {
               mode='contained'
               style={{padding: 10, marginHorizontal: 15}}
             >
-              Login
+              Logar
             </Button>
           </View>
         </View>
@@ -68,8 +68,10 @@ const styles = StyleSheet.create({
   introText: {
     textAlign: 'center',
     justifyContent: 'center',
-    fontSize: 22,
-    padding: 15
+    fontSize: 24,
+    padding: 15,
+    color: 'brown',
+    fontWeight: 'bold'
   },
   infoText: {
     textAlign: 'center',

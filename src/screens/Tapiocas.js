@@ -10,6 +10,7 @@ export class ListaTapiocas extends Component {
   state = {
     tapiocas: [],
     precoTotal: 0,
+    userLevel: 0
   };
 
   componentDidMount() {
@@ -114,12 +115,16 @@ export class ListaTapiocas extends Component {
   render() {
     return (
       <View styles={styles.container}>
-        <FlatList
-          data={this.state.tapiocas}
-          keyExtractor={tapioca => tapioca.item.id.toString()}
-          renderItem={this.renderItems}
-        />
-        <TotalCompras repassePreco={this.state.precoTotal} />
+
+          <FlatList
+            data={this.state.tapiocas}
+            keyExtractor={tapioca => tapioca.item.id.toString()}
+            renderItem={this.renderItems}
+          />
+
+        <View style={{flex:1, alignItems: 'flex-start', justifyContent: 'space-between'}}>
+          <TotalCompras repassePreco={this.state.precoTotal} />
+        </View>
       </View>
     );
   }
@@ -128,8 +133,9 @@ export class ListaTapiocas extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    flexDirection: 'column',
+    alignItems: 'center'
   },
   item: {
     flexDirection: 'row',

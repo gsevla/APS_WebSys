@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation';
 import { Appbar, IconButton } from 'react-native-paper';
 import Tabs from './Tabs';
 import Modal from '../components/modal';
+import Login from '../screens/Login';
 
 const RootStack = createStackNavigator({
   Tabs: {
@@ -31,6 +32,7 @@ const RootStack = createStackNavigator({
     },
   },
   Modal: Modal,
+  Login: Login,
 });
 
 export default RootStack;

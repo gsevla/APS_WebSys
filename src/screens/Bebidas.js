@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { List, Text, Button } from 'react-native-paper';
-// import api from '../../../services/api';
-// import TotalCompras from '../../totalCompra';
-// import textManipulation from '../../../services/textManipulation';
+import api from '../services/api';
+import TotalCompras from '../components/totalCompra';
+import textManipulation from '../services/textManipulation';
 
 // export class ListaBebidas extends Component {
-//   textManipulation = new textManipulation();
 //   state ={
 //     bebidas: [],
 //     precoTotal: 0
