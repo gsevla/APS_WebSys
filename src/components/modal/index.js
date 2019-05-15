@@ -1,52 +1,55 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Button } from 'react-native-paper';
+import * as React from "react";
+import { View, StyleSheet } from "react-native";
+import { Text, Button } from "react-native-paper";
 
 export default class UserModal extends React.Component {
-
   static navigationOptions = {
-    title: 'Usuário'
+    title: "Usuário"
   };
 
   state = {
-    userLevel: 0,
+    userLevel: 0
   };
 
   render() {
-    if(this.state.userLevel == 0) {
+    if (this.state.userLevel == 0) {
       return (
         <View style={styles.container}>
-          <View style={{flex:1}}>
+          <View style={{ flex: 1 }}>
             <Text style={styles.introText}>Olá!</Text>
-            <Text style={styles.infoText}>Verificamos que você não está logado, escolha uma das opções abaixo por favor:</Text>
+            <Text style={styles.infoText}>
+              Verificamos que você não está logado, escolha uma das opções
+              abaixo por favor:
+            </Text>
           </View>
           <View style={styles.buttonsContainer}>
             <Button
-              onPress={() => {
-                this.props.navigation.push('Login');
-              }}
-              mode='contained'
-              style={{padding: 10, marginHorizontal: 15}}
+              onPress={() => {}}
+              mode="contained"
+              style={{ padding: 10, marginHorizontal: 15 }}
             >
               Registrar
             </Button>
-              
+
             <Button
               onPress={() => {
-  
+                this.props.navigation.push("Login");
               }}
-              mode='contained'
-              style={{padding: 10, marginHorizontal: 15}}
+              mode="contained"
+              style={{ padding: 10, marginHorizontal: 15 }}
             >
               Logar
             </Button>
           </View>
         </View>
       );
-    } else if(this.state.userLevel == 1) {
+    } else if (this.state.userLevel == 1) {
       return (
         <View>
-          <Text>retornar informações do usuário e fornecer opções de editar informações e logout</Text>
+          <Text>
+            retornar informações do usuário e fornecer opções de editar
+            informações e logout
+          </Text>
         </View>
       );
     } else {
@@ -62,27 +65,27 @@ export default class UserModal extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: "flex-start",
+    alignItems: "center"
   },
   introText: {
-    textAlign: 'center',
-    justifyContent: 'center',
+    textAlign: "center",
+    justifyContent: "center",
     fontSize: 24,
     padding: 15,
-    color: 'brown',
-    fontWeight: 'bold'
+    color: "brown",
+    fontWeight: "bold"
   },
   infoText: {
-    textAlign: 'center',
-    justifyContent: 'center',
+    textAlign: "center",
+    justifyContent: "center",
     fontSize: 16,
-    color: '#A9A9A9'
+    color: "#A9A9A9"
   },
   buttonsContainer: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    flexDirection: 'row',
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    flexDirection: "row"
   }
 });

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import { List, Text, Button } from 'react-native-paper';
-import api from '../services/api';
-import TotalCompras from '../components/totalCompra';
-import textManipulation from '../services/textManipulation';
-import { Appbar, IconButton } from 'react-native-paper';
+import React, { Component } from "react";
+import { View, StyleSheet, FlatList } from "react-native";
+import { List, Text, Button } from "react-native-paper";
+import api from "../services/api";
+import TotalCompras from "../components/totalCompra";
+import textManipulation from "../services/textManipulation";
+import { Appbar, IconButton } from "react-native-paper";
 
 export class ListaTapiocas extends Component {
   state = {
@@ -18,7 +18,7 @@ export class ListaTapiocas extends Component {
   }
 
   getTapiocas = async () => {
-    const r = await api.get('/tapiocas');
+    const r = await api.get("/tapiocas");
 
     const items = r.data;
     let l = [];
@@ -33,8 +33,8 @@ export class ListaTapiocas extends Component {
     <View
       styles={{
         flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        justifyContent: "space-between"
       }}
     >
       <List.Item
@@ -43,7 +43,7 @@ export class ListaTapiocas extends Component {
         titleEllipsizeMode="middle"
         left={props => (
           <Button
-            onPress={() => console.log('Pressed')}
+            onPress={() => console.log("Pressed")}
             icon="priority-high"
             mode="outline"
             compact="true"
@@ -54,8 +54,8 @@ export class ListaTapiocas extends Component {
           <View
             style={{
               flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
+              flexDirection: "row",
+              justifyContent: "space-around"
             }}
           >
             <Button
@@ -73,7 +73,7 @@ export class ListaTapiocas extends Component {
                 console.log(price);
                 await this.setState({
                   tapiocas: newTapiocas,
-                  precoTotal: this.state.precoTotal - price,
+                  precoTotal: this.state.precoTotal - price
                 });
               }}
               icon="expand-more"
@@ -97,7 +97,7 @@ export class ListaTapiocas extends Component {
                 console.log(price);
                 await this.setState({
                   tapiocas: newTapiocas,
-                  precoTotal: this.state.precoTotal + price,
+                  precoTotal: this.state.precoTotal + price
                 });
                 console.log(this.state.precoTotal);
               }}
@@ -115,14 +115,18 @@ export class ListaTapiocas extends Component {
   render() {
     return (
       <View styles={styles.container}>
+        <FlatList
+          data={this.state.tapiocas}
+          keyExtractor={tapioca => tapioca.item.id.toString()}
+          renderItem={this.renderItems} />
 
-          <FlatList
-            data={this.state.tapiocas}
-            keyExtractor={tapioca => tapioca.item.id.toString()}
-            renderItem={this.renderItems}
-          />
-
-        <View style={{flex:1, alignItems: 'flex-start', justifyContent: 'space-between'}}>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "flex-start",
+            justifyContent: "space-between"
+          }}
+        >
           <TotalCompras repassePreco={this.state.precoTotal} />
         </View>
       </View>
@@ -133,14 +137,14 @@ export class ListaTapiocas extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   item: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+    flexDirection: "row",
+    justifyContent: "space-between"
+  }
 });
 
 export default ListaTapiocas;
