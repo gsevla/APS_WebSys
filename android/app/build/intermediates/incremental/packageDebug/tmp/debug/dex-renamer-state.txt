@@ -1,4 +1,0 @@
-#Tue May 14 20:08:21 BRT 2019
-base.0=/home/gsalves/Documentos/git/APS_WebSys/android/app/build/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex
