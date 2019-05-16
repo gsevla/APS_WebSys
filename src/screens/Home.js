@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import Card from "../components/Card";
+import CarrinhoIndicator from "../components/carrinhoIndicator";
 
 export default class Home extends Component {
   state = {
@@ -21,6 +22,7 @@ export default class Home extends Component {
         <Card icon="" title="Bebidas" navigate={() => {}} />
         <Card icon="" title="Pedidos" navigate={() => {}} />
         <Card icon="" title="Tapiocas" navigate={() => {}} />
+        <CarrinhoIndicator />
       </View>
     );
   }

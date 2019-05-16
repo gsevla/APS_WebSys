@@ -4,6 +4,7 @@ import { List, Text, Button } from "react-native-paper";
 import api from "../services/api";
 import TotalCompras from "../components/totalCompra";
 import { moneyFormat } from "../services/utils";
+import CarrinhoIndicator from "../components/carrinhoIndicator";
 
 export class ListaTapiocas extends Component {
   state = {
@@ -123,6 +124,7 @@ export class ListaTapiocas extends Component {
         >
           <TotalCompras repassePreco={this.state.precoTotal} />
         </View>
+        <CarrinhoIndicator />
       </View>
     );
   }
