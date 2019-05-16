@@ -1,29 +1,33 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
-import { Button } from "react-native-paper";
+import { View, StyleSheet, Dimensions } from "react-native";
+import Card from "../components/Card";
 
 export default class Home extends Component {
+  state = {
+    carrinho: {},
+    usuario: {}
+  };
 
-    state = {
-        carrinho: {},
-        usuario: {},
-    }
-
-    addCarrinho = (produtos) => {
-
-    }
+  addCarrinho = produtos => {};
 
   render() {
     return (
-      <View>
-        <Button
-          icon="home"
-          mode="contained"
-          onPress={() => this.props.navigation.navigate('Tapiocas')}
-        >
-          Press me
-        </Button>
+      <View style={styles.container}>
+
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: 'wrap'
+  }
+});
