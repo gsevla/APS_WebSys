@@ -13,7 +13,7 @@ const RootStack = createStackNavigator({
       return {
         header: (
           <Appbar.Header>
-            <Appbar.Content title="Billy" subtitle="Tapiocas e Bebidas" />
+            <Appbar.Content title={'Billy'} subtitle="Tapiocas e Bebidas" />
             <IconButton
               icon="person"
               size={24}
