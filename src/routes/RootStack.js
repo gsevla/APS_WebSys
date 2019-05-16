@@ -3,6 +3,7 @@ import Home from "../screens/Home";
 import Bebidas from "../screens/Bebidas";
 import Tapiocas from "../screens/Tapiocas";
 import Compras from "../screens/Compras";
+import Carrinho from "../screens/Carrinho";
 
 const RootStack = createStackNavigator({
   Home: {
@@ -15,7 +16,8 @@ const RootStack = createStackNavigator({
   },
   Bebidas: Bebidas,
   Tapiocas: Tapiocas,
-  Compras: Compras
+  Compras: Compras,
+  Carrinho: Carrinho
 });
 
 export default RootStack;

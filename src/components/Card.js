@@ -11,12 +11,10 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 let { height, width } = Dimensions.get("window");
 
 export default (Card = props => {
-  let { height, width } = Dimensions.get("window");
-
   return (
     <TouchableNativeFeedback onPress={props.navigate}>
       <View style={styles.container}>
-        <Icon name={props.icon} size={45} color="#900" />
+        <Icon color={props.color} name={props.icon} size={45} />
         <Text style={{ fontSize: 18 }}>{props.title}</Text>
       </View>
     </TouchableNativeFeedback>
