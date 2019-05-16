@@ -13,12 +13,14 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <Card
+          icon=""
+          title="Tapiocas"
+          navigate={() => this.props.navigation.navigate("Tapiocas")}
+        />
+        <Card icon="" title="Bebidas" navigate={() => {}} />
+        <Card icon="" title="Pedidos" navigate={() => {}} />
+        <Card icon="" title="Tapiocas" navigate={() => {}} />
       </View>
     );
   }
@@ -28,6 +30,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    flexWrap: 'wrap'
+    justifyContent: "center",
+    flexWrap: "wrap"
   }
 });
