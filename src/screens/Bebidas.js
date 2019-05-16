@@ -1,11 +1,31 @@
 import React, { Component } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import { List, Text, Button } from "react-native-paper";
+import { List, Text, Button, Appbar } from "react-native-paper";
 import api from "../services/api";
 import TotalCompras from "../components/totalCompra";
 import { moneyFormat } from "../services/utils";
+import CarrinhoIndicator from "../components/carrinhoIndicator";
 
 export class ListaBebidas extends Component {
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: (
+        <Appbar.Header>
+          <Appbar.BackAction
+            onPress={ () => {
+              navigation.getParam('addCarrinho')(navigation.getParam('localCar')());
+              navigation.pop()
+            }}
+          />
+          <Appbar.Content
+            title="Bebidas"
+          />
+        </Appbar.Header>
+      )
+    };
+  };
+
   state = {
     bebidas: [],
     precoTotal: 0,
@@ -14,6 +34,7 @@ export class ListaBebidas extends Component {
 
   componentDidMount() {
     this.getBebidas();
+    this.props.navigation.setParams({localCar: this.returnBebidasList});
   }
 
   getBebidas = async () => {
@@ -108,6 +129,22 @@ export class ListaBebidas extends Component {
     </View>
   );
 
+  lenCarrinhoGlobal = () => {
+    let carrinho = this.props.navigation.getParam('getCarrinho')();
+
+    let list = this.returnBebidasList();
+    
+    return carrinho.length+list.length;
+  }
+
+  returnBebidasList = () => {
+    let list = this.state.bebidas.filter((bebida) => {
+      return bebida.qtde > 0
+    })
+
+    return list;
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -124,6 +161,7 @@ export class ListaBebidas extends Component {
         >
           <TotalCompras repassePreco={this.state.precoTotal} />
         </View>
+        {this.lenCarrinhoGlobal() ? <CarrinhoIndicator /> : null}
       </View>
     );
   }

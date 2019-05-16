@@ -12,14 +12,12 @@ export default class CarrinhoIndicator extends Component {
       
     return (
         <TouchableNativeFeedback
-         onPress={() => {
-             
-        }}
+         onPress={() => {}}
         >
              <View style={styles.container}>
             
                 <View style={styles.box}>
-                    <Text style={{fontSize: 14, color: 'white'}}>R${`2,5`}</Text>
+                    <Text style={{fontSize: 14, color: 'white'}}>R${`${this.props.valor}`}</Text>
                     <Text style={{fontSize: 16, color: 'white'}}>Ver carrinho</Text>
                     <Text style={{fontSize: 14, color: 'white'}}>{`4`}</Text>
                 </View>

@@ -1,12 +1,32 @@
 import React, { Component } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import { List, Text, Button } from "react-native-paper";
+import { List, Text, Button, Appbar } from "react-native-paper";
 import api from "../services/api";
 import TotalCompras from "../components/totalCompra";
 import { moneyFormat } from "../services/utils";
 import CarrinhoIndicator from "../components/carrinhoIndicator";
 
 export class ListaTapiocas extends Component {
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: (
+        <Appbar.Header>
+          <Appbar.BackAction
+            onPress={ () => {
+              navigation.getParam('addCarrinho')(navigation.getParam('localCar')());
+              navigation.pop()
+            }}
+          />
+          <Appbar.Content
+            title="Tapiocas"
+          />
+        </Appbar.Header>
+      )
+    };
+  };
+
+
   state = {
     tapiocas: [],
     precoTotal: 0,
@@ -15,6 +35,7 @@ export class ListaTapiocas extends Component {
 
   componentDidMount() {
     this.getTapiocas();
+    this.props.navigation.setParams({localCar: this.returnTapiocasList});
   }
 
   getTapiocas = async () => {
@@ -22,7 +43,7 @@ export class ListaTapiocas extends Component {
 
     const items = r.data;
     const tapiocas = items.map(item => {
-      return { item, qtde: 0 };
+      return { ...item, qtde: 0 };
     });
 
     await this.setState({ tapiocas: tapiocas });
@@ -37,8 +58,8 @@ export class ListaTapiocas extends Component {
       }}
     >
       <List.Item
-        title={item.item.descricao}
-        description={`R$ ${moneyFormat(item.item.valor)}`}
+        title={item.descricao}
+        description={`R$ ${moneyFormat(item.valor)}`}
         titleEllipsizeMode="middle"
         left={props => (
           <Button
@@ -46,7 +67,7 @@ export class ListaTapiocas extends Component {
             icon="notifications"
             mode="outline"
             compact="true"
-            disabled={item.item.disponibilidade}
+            disabled={item.disponibilidade}
           />
         )}
         right={props => (
@@ -61,23 +82,23 @@ export class ListaTapiocas extends Component {
               onPress={async () => {
                 let price = 0;
                 const newTapiocas = this.state.tapiocas.map(tapioca => {
-                  if (tapioca.item.id == item.item.id) {
+                  if (tapioca.id == item.id) {
                     if (tapioca.qtde > 0) {
                       tapioca.qtde = tapioca.qtde - 1;
-                      price = price + tapioca.item.valor;
+                      price = price + tapioca.valor;
                     }
                   }
                   return tapioca;
                 });
                 await this.setState({
                   tapiocas: newTapiocas,
-                  precoTotal: this.state.precoTotal - price
+                  precoTotal: this.state.precoTotal - price,
                 });
               }}
               icon="expand-more"
               mode="outline"
               compact="true"
-              disabled={!item.item.disponibilidade}
+              disabled={!item.disponibilidade}
             />
 
             <Text style={{ marginTop: 10 }}>{item.qtde}</Text>
@@ -86,21 +107,21 @@ export class ListaTapiocas extends Component {
               onPress={async () => {
                 let price = 0;
                 const newTapiocas = this.state.tapiocas.map(tapioca => {
-                  if (tapioca.item.id == item.item.id) {
+                  if (tapioca.id == item.id) {
                     tapioca.qtde = tapioca.qtde + 1;
-                    price = price + tapioca.item.valor;
+                    price = price + tapioca.valor;
                   }
                   return tapioca;
                 });
                 await this.setState({
                   tapiocas: newTapiocas,
-                  precoTotal: this.state.precoTotal + price
+                  precoTotal: this.state.precoTotal + price,
                 });
               }}
               icon="expand-less"
               mode="outline"
               compact="true"
-              disabled={!item.item.disponibilidade}
+              disabled={!item.disponibilidade}
             />
           </View>
         )}
@@ -108,12 +129,28 @@ export class ListaTapiocas extends Component {
     </View>
   );
 
+  lenCarrinhoGlobal = () => {
+    let carrinho = this.props.navigation.getParam('getCarrinho')();
+
+    let list = this.returnTapiocasList();
+    
+    return carrinho.length+list.length;
+  }
+
+  returnTapiocasList = () => {
+    let list = this.state.tapiocas.filter((tapioca) => {
+      return tapioca.qtde > 0
+    })
+
+    return list;
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <FlatList
           data={this.state.tapiocas}
-          keyExtractor={tapioca => tapioca.item.id.toString()}
+          keyExtractor={tapioca => tapioca.id.toString()}
           renderItem={this.renderItems}
         />
 
@@ -124,7 +161,7 @@ export class ListaTapiocas extends Component {
         >
           <TotalCompras repassePreco={this.state.precoTotal} />
         </View>
-        <CarrinhoIndicator />
+        {this.lenCarrinhoGlobal() ? <CarrinhoIndicator /> : null}
       </View>
     );
   }

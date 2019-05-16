@@ -70,7 +70,7 @@ export class Login extends Component {
             if (this.state.email && this.state.passwd) {
               alert("Logado com sucesso!");
               global.user.isLogged = true;
-              this.props.navigation.navigate("A");
+              this.props.navigation.navigate("Home");
             } else {
               alert("Preencha os campos corretamente.");
               global.user.isLogged = false;
