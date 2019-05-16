@@ -1,48 +1,21 @@
-import React from "react";
 import { createStackNavigator } from "react-navigation";
-import { Appbar, IconButton, Badge } from "react-native-paper";
-import Tabs from "./Tabs";
-import Modal from "../components/modal";
-import Login from "../screens/Login";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Home from "../screens/Home";
+import Bebidas from "../screens/Bebidas";
+import Tapiocas from "../screens/Tapiocas";
+import Compras from "../screens/Compras";
 
 const RootStack = createStackNavigator({
-  Tabs: {
-    screen: Tabs,
+  Home: {
+    screen: Home,
     navigationOptions: ({ navigation }) => {
       return {
-        header: (
-          <Appbar.Header>
-            <Appbar.Content title={'Billy'} subtitle="Tapiocas e Bebidas" />
-            <IconButton
-              icon="person"
-              size={24}
-              onPress={() => {
-                {
-                  global.user.isLogged
-                    ? alert("Você já está logado")
-                    : navigation.push("Modal");
-                }
-              }}
-            />
-            {global.user.isLogged ? (
-              <Badge style={{ position: "relative", top: -5, right: 15 }}>
-                <Icon name="check" size={15} color="white" />
-              </Badge>
-            ) : null}
-            <IconButton
-              icon="shopping-cart"
-              size={24}
-              onPress={() => {}}
-              disabled={false}
-            />
-          </Appbar.Header>
-        )
+        title: "Tela inicial"
       };
     }
   },
-  Modal: Modal,
-  Login: Login
+  Bebidas: Bebidas,
+  Tapiocas: Tapiocas,
+  Compras: Compras
 });
 
 export default RootStack;
